@@ -1,2 +1,2 @@
 def aaa():
-    pass
+    该了pass
