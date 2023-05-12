@@ -1,26 +1,7 @@
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-import jieba
+redis是并发安全的吗
+redis是并发安全的
 
-from PIL import Image
-import numpy as np
-
-def create_word_cloud(words):
-    text = " ".join(jieba.cut(words,cut_all=False,HMM=True))
-    wc = WordCloud(
-        font_path = "C:\Windows\Fonts\msyhl.ttc",
-        max_words=100,
-        width=2000,
-        height=1200
-    )
-    wordcloud = wc.generate(text)
-    wordcloud.to_file("wordcloud.jpg")
-    plt.imshow(wordcloud)
-    plt.axis("off")
-    plt.show()
-
-s = '''
-  fff
-'''
-
-create_word_cloud(s)
+安全问题是由键值对异步读写导致的
+Redis6.0以前是单线程，所谓的单线程是指其网络I/O和键值对读写是由一个线程完成的，不存在键值对的异步读写问题，所以Redis是并发安全的。
+虽然Redis6.0引入了多线程，但这里的多线程只是对网络请求过程采用了多线程(利用了CPU的多核实现)，而其键值对读写依然采用并发安全的单线程处理。
+ 所以Redis依然是并发安全的。
