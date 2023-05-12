@@ -1,7 +1,33 @@
-redis是并发安全的吗
-redis是并发安全的
+from collections import Counter
+nums = [1,2,3,3,3,2]
+count = Counter(nums)
+print(count)
+'''
+输出
+Counter({3: 3, 2: 2, 1: 1})
+'''
 
-安全问题是由键值对异步读写导致的
-Redis6.0以前是单线程，所谓的单线程是指其网络I/O和键值对读写是由一个线程完成的，不存在键值对的异步读写问题，所以Redis是并发安全的。
-虽然Redis6.0引入了多线程，但这里的多线程只是对网络请求过程采用了多线程(利用了CPU的多核实现)，而其键值对读写依然采用并发安全的单线程处理。
- 所以Redis依然是并发安全的。
+print(count[3]) # 打印3的个数
+'''
+输出
+3
+'''
+
+for k,v in count.items():
+    print(k,v)
+'''
+输出
+1 1
+2 2
+3 3
+'''
+
+a = count.most_common(2)
+print(a)
+'''
+输出
+[(3, 3), (2, 2)]
+'''
+
+print([1,2,3].count(1))
+
