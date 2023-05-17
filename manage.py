@@ -1,1 +1,7 @@
-s
+python如何操作Excel表
+
+xlwt/xlrd：用于生成和读取比较老的excel文件，比如xls格式，最大行数限制为65536行。其中xlrd是读excel，xlwt是写excel的库。
+
+openpyxl：用于生成2010之后新的excel文件，比如xlsx格式，最大行数限制为1048576行
+
+pandas：pandas是最强大的数据分析库，自带excel读取和生成模块
