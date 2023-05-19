@@ -1,8 +1,34 @@
-python的猴子补丁(Monkey Patching)
+import json
 
+dic = {"status": "OK", "count": 20, "results": [{"age": 27, "name": "aex", "lactose_intolerant": True}, {"age": 29, "name": "jil", "lactose_intolerant": False}]}
 
+# 普通dump
+print(json.dumps(dic))
+'''
+输出
+{'status': 'OK', 'count': 20, 'results': [{'age': 27, 'name': 'aex', 'lactose_intolerant': True}, {'age': 29, 'name': 'jil', 'lactose_intolerant': False}]}
+'''
 
-Python是一种典型的动态脚本语言
- Python的类是可变的，方法(methods)只是类的属性(attributes)，这允许我们在运行时修改其行为。
-  指的是对函数(function)、类(class)或模块(module)的动态（或运行时）修改。
+# 加上 indention参数
+print(json.dumps(dic,indent=2))
+'''
+{
+  "status": "OK",
+  "count": 20,
+  "results": [
+    {
+      "age": 27,
+      "name": "aex",
+      "lactose_intolerant": true
+    },
+    {
+      "age": 29,
+      "name": "jil",
+      "lactose_intolerant": false
+    }
+  ]
+}
+'''
+
+这样无论是打印输出还是写入到文件都很美观，易于阅读
 
