@@ -1,8 +1,17 @@
-在vim中
-显示换行符等字符
-:set invlist
-关闭显示
-:set nolist
+python获取当前系统用户名和主机名
+
+获取用户名
+import getpass
+print(getpass.getuser())
+# 输出 root
+
+import os
+print(os.getlogin())
+# 输入root
 
 
-其中一个^I表示出来\t,$表示出来\n
+获取主机名
+import platform
+print(platform.node())
+# 输出 DESKTOP-LU87hD6
+    
