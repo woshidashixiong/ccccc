@@ -1,17 +1,12 @@
-python获取当前系统用户名和主机名
+from collections import Counter
+names = []
+while True:
+    input_name = input()
+    if input_name == "end":
+        break
+    names.append(input_name)
 
-获取用户名
-import getpass
-print(getpass.getuser())
-# 输出 root
-
-import os
-print(os.getlogin())
-# 输入root
-
-
-获取主机名
-import platform
-print(platform.node())
-# 输出 DESKTOP-LU87hD6
+c = Counter(names)
+for index,tu in enumerate(c.most_common(),start=1):
+    print(f"第{index}名{tu[0]}票数{tu[1]}")
     
