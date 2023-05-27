@@ -1,12 +1,15 @@
-from collections import Counter
-names = []
-while True:
-    input_name = input()
-    if input_name == "end":
-        break
-    names.append(input_name)
+python如何同时迭代2个列表？
 
-c = Counter(names)
-for index,tu in enumerate(c.most_common(),start=1):
-    print(f"第{index}名{tu[0]}票数{tu[1]}")
-    
+
+li1 = ["a","b","c"]
+li2 = [1,2,3]
+
+
+for name,score in zip(li1,li2):
+    print(name,score)
+'''
+输出
+a 1
+b 2
+c 3
+'''
