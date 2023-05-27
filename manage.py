@@ -1,15 +1,4 @@
-python如何同时迭代2个列表？
+实战面试题： 怎么快速打印出包含所有 ASCII 字母（大写和小写）的字符串?
 
-
-li1 = ["a","b","c"]
-li2 = [1,2,3]
-
-
-for name,score in zip(li1,li2):
-    print(name,score)
-'''
-输出
-a 1
-b 2
-c 3
-'''
+print(string.ascii_letters)
+# abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
