@@ -1,37 +1,17 @@
-按照题目要求写出对应的装饰器。
-要求：有一个通过网络获取数据的函数（可能会因为网络原因出现异常），写一个装饰器让这个函数在出现指定异常时可以重试指定的次数，并在每次重试之前随机延迟一段时间，最长延迟时间可以通过参数进行控制。
+
+说一下`namedtuple`的用法和作用
+
+namedtuple又名具名元组，因为普通元组的局限性，不能为元组的数据进行命名，所以我们并不知道一个元组所要表达的意义，
+所以python引入了collections.namedtuple这个工厂函数来构造一个带字段名的元组。
+
+namedtuple能够用来创建类似于元祖的数据类型，除了能够用索引来访问数据，能够迭代，还能够方便的通过属性名来访问数据
+能够让我们的代码更加的直观更好维护
 
 
-
-from functools import wraps
-from random import random
-from time import sleep
-
-
-def retry(*, retry_times=3, max_wait_secs=5, errors=(Exception, )):
-
-    def decorate(func):
-
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            for _ in range(retry_times):
-                try:
-                    return func(*args, **kwargs)
-                except errors:
-                    sleep(random() * max_wait_secs)
-            return None
-
-        return wrapper
-
-    return decorate
-
-
-
-在Django Celery中，您可以使用以下配置来指定pickle作为默认的序列化器：
-
-```python
-CELERY_TASK_SERIALIZER = 'pickle'
-CELERY_RESULT_SERIALIZER = 'pickle'
-```
-
-
+from collections import namedtuple
+Friend =namedtuple("Friend",['name','age','email'])
+f1=Friend('giga',38,'gaga@qq.com')
+print(f1)  # Friend(name='giga', age=38, email='gaga@qq.com')
+print(f1.age) # 38
+print(f1.email) # gaga@qq.com
+print(f1[0]) # giga
