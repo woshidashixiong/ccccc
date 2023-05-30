@@ -26,3 +26,12 @@ def retry(*, retry_times=3, max_wait_secs=5, errors=(Exception, )):
     return decorate
 
 
+
+在Django Celery中，您可以使用以下配置来指定pickle作为默认的序列化器：
+
+```python
+CELERY_TASK_SERIALIZER = 'pickle'
+CELERY_RESULT_SERIALIZER = 'pickle'
+```
+
+
