@@ -1,17 +1,19 @@
+1.从本地将文件传输到服务器
+scp 【本地文件的路径】 【服务器用户名】@【服务器地址】:【要存放文件的路径】
 
-说一下`namedtuple`的用法和作用
+scp /usr/local/tools/test.png root@192.168.1.1:/usr/local/tools/
 
-namedtuple又名具名元组，因为普通元组的局限性，不能为元组的数据进行命名，所以我们并不知道一个元组所要表达的意义，
-所以python引入了collections.namedtuple这个工厂函数来构造一个带字段名的元组。
+2.从本地将文件夹传输到服务器
+scp -r 【本地文件的路径】 【服务器用户名】@【服务器地址】:【要存放文件夹的路径】
 
-namedtuple能够用来创建类似于元祖的数据类型，除了能够用索引来访问数据，能够迭代，还能够方便的通过属性名来访问数据
-能够让我们的代码更加的直观更好维护
+scp -r /usr/local/tools/test root@192.168.1.1:/usr/local/tools
 
+3.将服务器上的文件传输到本地
+scp 【服务器用户名】@【服务器地址】:【服务器上存放文件的路径】 【本地文件的路径】
 
-from collections import namedtuple
-Friend =namedtuple("Friend",['name','age','email'])
-f1=Friend('giga',38,'gaga@qq.com')
-print(f1)  # Friend(name='giga', age=38, email='gaga@qq.com')
-print(f1.age) # 38
-print(f1.email) # gaga@qq.com
-print(f1[0]) # giga
+scp root@192.168.1.1:/usr/local/tools/111.png /usr/local/tools
+
+4.将服务器上的文件夹传输到本地
+scp -r 【服务器用户名】@【服务器地址】:【服务器上存放文件的路径】【本地文件的路径】
+
+scp -r root@192.168.1.1:/data/wwwroot/default/test /
