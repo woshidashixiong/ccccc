@@ -1,21 +1,14 @@
-python 异常捕获里的“坑”
+运行下面的代码是否会报错，如果报错请说明哪里有什么样的错，如果不报错请说出代码的执行结果。
 
-def func():
-    try:
-        return 1
-    except:
-        return 2
-    else:
-        return 3
-    finally:
-        return 4
+class A: 
+    def __init__(self, value):
+        self.__value = value
 
-你觉得调用func会返回哪一个值？
-实际上不是1，也不是3，即使try里面有异常也不是2
+    @property
+    def value(self):
+        return self.__value
 
-print(func()) # 输出4
-
-原因是，在try…finally…语句中，因为要保证finally能够执行，所以try,except,else里的return无效
-
-在这里需要小心
-
+obj = A(1)
+obj.__value = 2
+print(obj.value)
+print(obj.__value)
