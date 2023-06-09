@@ -1,7 +1,45 @@
-说一下你对Python中模块和包的理解。
-每个Python文件就是一个模块，而保存这些文件的文件夹就是一个包，
-但是这个作为Python包的文件夹必须要有一个名为__init__.py的文件，否则无法导入这个包。
-通常一个文件夹下还可以有子文件夹，这也就意味着一个包下还可以有子包，子包中的__init__.py并不是必须的。
-模块和包解决了Python中命名冲突的问题，不同的包下可以有同名的模块，不同的模块下可以有同名的变量、函数或类。
-在Python中可以使用import或from ... import ...来导入包和模块，
-在导入的时候还可以使用as关键字对包、模块、类、函数、变量等进行别名，从而彻底解决编程中尤其是多人协作团队开发时的命名冲突问题。
+在 Flask 中设置接口超时时间可以通过使用装饰器来实现。具体步骤如下：
+
+1. 导入 `signal` 模块：
+
+   ```python
+   import signal
+   from functools import wraps
+   ```
+
+2. 定义一个装饰器函数，用于设置超时时间：
+
+   ```python
+   def timeout(seconds=10, error_message='Timeout'):
+       def decorator(func):
+           def _handle_timeout(signum, frame):
+               raise TimeoutError(error_message)
+           @wraps(func)
+           def wrapper(*args, **kwargs):
+               signal.signal(signal.SIGALRM, _handle_timeout)
+               signal.alarm(seconds)
+               try:
+                   result = func(*args, **kwargs)
+               finally:
+                   signal.alarm(0)
+               return result
+
+           return wrapper
+
+       return decorator
+   ```
+
+   这个装饰器函数接受两个参数：`seconds` 表示超时时间，`error_message` 表示超时时抛出的异常信息。
+
+3. 在需要设置超时时间的接口函数上使用装饰器：
+
+   ```python
+   @app.route('/api/some_endpoint')
+   @timeout(seconds=5)
+   def some_endpoint():
+       # 接口函数的实现
+   ```
+
+   在这个例子中，`some_endpoint` 函数的超时时间被设置为 5 秒。
+
+注意：在使用 `signal` 模块时，需要注意操作系统的限制。在windows操作系统中，`signal` 模块可能无法正常工作。
