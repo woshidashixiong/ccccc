@@ -1,16 +1,12 @@
-!=和is not运算符的区别？
+什么是lambda函数？
 
 
-!=如果两个变量或对象的值不相等，则返回true。
 
-is not是用来检查两个对象是否属于同一内存对象。
+Lambda函数是不带名称的单行函数，可以具有n个参数，但只能有一个表达式。也称为匿名函数。
 
 
-li1 = [1,2,3]
-li2 = [1,2,3]
 
-li1 != li2
->False
+a = lambda x, y：x + y 
+print(a(1, 2))
 
-lst1 is not lst2
->True
+> 3
