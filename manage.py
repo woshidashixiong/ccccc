@@ -1,19 +1,16 @@
-什么是switch语句。如何在Python中创建switch语句？
+!=和is not运算符的区别？
 
-switch语句是实现多分支选择功能，根据列表值测试变量。
 
-switch语句中的每个值都被称为一个case。
+!=如果两个变量或对象的值不相等，则返回true。
 
-在Python中，没有内置switch函数，但是我们可以创建一个自定义的switch语句。
+is not是用来检查两个对象是否属于同一内存对象。
 
-switch = {
-   1: "January",
-   2: "February",
-   3: "March",
-   4: "April"
-}
-month = int(input())
-print(switch.get(month))
 
-> 1
-January
+li1 = [1,2,3]
+li2 = [1,2,3]
+
+li1 != li2
+>False
+
+lst1 is not lst2
+>True
