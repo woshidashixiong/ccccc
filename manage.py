@@ -1,14 +1,24 @@
-python获取文件的编码类型
 
-可以使用 `chardet` 模块来获取文件的编码类型。以下是一个示例代码：
+python类变量在多线程下是安全的吗？ /实例变量在多线程下是安全的吗
 
-```python
-import chardet
+import threading
+import time
 
-with open('file.txt', 'rb') as f:
-    result = chardet.detect(f.read())
+class A:
+    dic = {}
 
-print(result['encoding'])
-```
+def aa(i):
+    A.dic["vv"] = i
+    time.sleep(2)
+    print(i,A.dic["vv"])
 
-其中，`file.txt` 是要获取编码类型的文件名。`chardet.detect()` 函数会返回一个字典，其中包含了文件编码类型的信息。我们可以通过访问字典的 `encoding` 键来获取文件的编码类型。
+
+threads = []
+
+for i in range(3):
+    t = threading.Thread(target=aa,args=[i])
+    t.start()
+    threads.append(t)
+
+for t_obj in threads:
+    t_obj.join()
