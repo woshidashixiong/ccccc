@@ -1,127 +1,34 @@
-很多人知道处理时间用datetime，却不知道Pendulum
-对于那些在 python 中处理日期时间时会感到沮丧的人来说，Pendulum 很适合你
-Pendulum是一个Python日期时间库，它提供了更简单的接口和更好的功能，以便在Python中处理日期和时间。
-它是一个开源项目，可以在GitHub上找到它的源代码和文档。
-Pendulum提供了许多有用的功能，例如时区支持、日期时间计算、日期时间格式化、日期时间解析等。
-它还提供了一些方便的方法来处理日期和时间，例如获取当前日期时间、获取日期时间差等。
-Pendulum可以与Python 2.7和Python 3.x一起使用，并且可以在Linux、Mac和Windows上安装和使用。
+memray 是一个Python库，它提供了一种可视化内存管理工具，可以帮助Python开发人员更好地理解和优化他们的代码中的内存使用情况。
 
-1. 创建一个Pendulum对象
+它是由彭博社开发的，可用于分析Python程序中的内存泄漏和其他内存问题。以下是memray库的使用场景和入门案例：
 
-```python
-import pendulum
+使用场景：
 
-dt = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-print(dt)
-```
+优化内存使用：当你的Python程序使用大量内存时，可以使用memray库来识别哪些变量和对象正在占用大量内存，以便优化你的代码。
+调试内存泄漏：当你的Python程序出现内存泄漏时，可以使用memray库来识别哪些变量和对象正在泄漏内存，以便进行调试。
+分析对象引用：当你需要了解Python对象之间的引用关系时，可以使用memray库来分析对象之间的引用链，以便更好地理解代码。
+如何使用：
 
-输出：
+假设你有一个Python程序，它读取大量的数据并处理它们。你发现这个程序在处理大量数据时会使用大量的内存。你想了解哪些变量和对象正在占用大量内存。
 
-```
-2021-09-30T00:00:00+08:00
-```
+以下是使用memray库进行内存分析的入门案例：
 
-2. 获取当前时间
+首先，安装memray库：
 
-```python
-now = pendulum.now()
-print(now)
-```
+pip install memray
+然后，在你的Python程序中引入memray库并运行你的代码。当你的程序开始使用大量内存时，你可以使用memray库来识别内存占用情况。例如，你可以使用以下代码来获取程序中最大的内存使用量：
 
-输出：
+import memray
+memray.print_max_usage()
+这将打印出程序的最大内存使用量和使用最多内存的对象的信息。你可以使用这些信息来优化你的代码并减少内存使用。
 
-```
-2021-10-01T10:00:00.000000+00:00
-```
+此外，你可以使用memray库来分析对象之间的引用关系。例如，你可以使用以下代码来获取一个对象及其所有引用的对象的信息：
 
-3. 时区转换
+import memray
+my_object = ...
+memray.print_object_summary(my_object)
+这将打印出my_object及其引用的所有对象的信息。你可以使用这些信息来更好地理解你的代码并优化内存使用。
 
-```python
-dt = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-dt_utc = dt.in_timezone('UTC')
-print(dt_utc)
-```
+总之，memray是一个非常有用的Python库，可以帮助开发人员更好地理解和优化他们的代码中的内存使用情况。它提供了一些实用的工具来识别内存占用情况、调试内存泄漏和分析对象引用关系。
 
-输出：
-
-```
-2021-09-29T16:00:00+00:00
-```
-
-4. 时间加减
-
-```python
-dt = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-dt_plus_one_day = dt.add(days=1)
-print(dt_plus_one_day)
-```
-
-输出：
-
-```
-2021-10-01T00:00:00+08:00
-```
-
-5. 时间格式化
-
-```python
-dt = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-print(dt.to_iso8601_string())
-print(dt.format('YYYY-MM-DD HH:mm:ss'))
-```
-
-输出：
-
-```
-2021-09-30T00:00:00+08:00
-2021-09-30 00:00:00
-```
-
-6. 时间差
-
-```python
-dt1 = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-dt2 = pendulum.datetime(2021, 10, 1, tz='Asia/Shanghai')
-diff = dt2 - dt1
-print(diff.in_days())
-```
-
-输出：
-
-```
-1
-```
-
-7. 时间比较
-
-```python
-dt1 = pendulum.datetime(2021, 9, 30, tz='Asia/Shanghai')
-dt2 = pendulum.datetime(2021, 10, 1, tz='Asia/Shanghai')
-print(dt1 < dt2)
-print(dt1 == dt2)
-```
-
-输出：
-
-```
-True
-False
-```
-
-
-=============================================================
-python深拷贝和浅拷贝的区别
-
-Python中的深拷贝和浅拷贝是指在拷贝对象时，是否会同时拷贝该对象内部的所有元素。
-
-浅拷贝是指拷贝一个对象，只拷贝对象的引用，而不是对象本身。也就是说，当拷贝完成后，原始对象和拷贝对象会共享同一个内存地址。当修改其中一个对象时，另一个对象也会受到影响。
-
-深拷贝是指拷贝一个对象，并且递归地拷贝该对象内部的所有元素。也就是说，当拷贝完成后，原始对象和拷贝对象不会共享同一个内存地址。当修改其中一个对象时，另一个对象不会受到影响。
-
-例如，假设有一个列表a=[1,2,[3,4]]，进行浅拷贝b=a.copy()，则修改b[2][0]=5，会同时修改a[2][0]的值。而进行深拷贝c=copy.deepcopy(a)，则修改c[2][0]=5，不会影响a[2][0]的值
-
-===================================================================
-
-谷歌浏览器历史版本
-
-https://googlechromelabs.github.io/chrome-for-testing/
+https://github.com/bloomberg/memray
