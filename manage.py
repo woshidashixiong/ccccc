@@ -43,4 +43,23 @@ cpp_model.save("model.cpp")
 总之，Python HummingBird库是一个非常有用的机器学习库，它可以将训练好的模型转换为高性能的代码，以便在边缘设备上进行推理。它具有高效性、可扩展性和多种硬件加速器支持等特点，可以满足不同场景下的需求。如果您需要将机器学习模型部署到边缘设备上，请考虑使用Python HummingBird库。
 
 ======================================================
+下面对 strs 和 list 的值输出正确的是( C D )
+
+def changeList(li):
+    li.append("end")
+    print("list",li)
+
+strs = ["1","2"]
+changeList(strs)
+print("strs",strs)
+
+A strs [‘1’,‘2’] 
+B list [‘1’,‘2’]
+C list [‘1’,‘2’,’end’] 
+D strs [‘1’,‘2’,’end’]
+
+==========================================================
+
+
+
     
