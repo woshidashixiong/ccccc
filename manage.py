@@ -59,6 +59,27 @@ C list [‘1’,‘2’,’end’]
 D strs [‘1’,‘2’,’end’]
 
 ==========================================================
+from concurrent.futures import ThreadPoolExecutor
+
+pool = ThreadPoolExecutor(100) # 100 控制最大线程数
+
+
+def job(i):
+    print(f"do job {i}")
+    return i
+
+futuers = []
+for i in range(10):
+    fu = pool.submit(job,i) # i为job函数参数
+    futuers.append(fu)
+
+pool.shutdown(True) # True阻塞住等全部线程执行完，再关闭线程池
+for fu in futuers:
+    # 获取线程返回值，若线程执行异常，则打印线程异常信息
+    try:
+        result = fu.result()
+    except Exception as e:
+        print(traceback.format_exc())
 
 
 
