@@ -82,5 +82,14 @@ for fu in futuers:
         print(traceback.format_exc())
 
 
+=====================================================================
+python Queue,multiprocessing.Queue,multiprocessing.Manager().Queue()三种消息队列的区别
+import Queue
+#用于线程间的消息队列
 
-    
+from multiprocessing import Queue
+# 用于子进程间的消息队列
+
+from multiprocessing import Manager,Pool
+msg_q = Manager.Queue()
+用于进程池pool的进程之间的消息队列，由一个独立的python子进程管理该消息队列
