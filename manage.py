@@ -50,3 +50,43 @@ from multiprocessing import Queue
 from multiprocessing import Manager,Pool
 msg_q = Manager.Queue()
 用于进程池pool的进程之间的消息队列，由一个独立的python子进程管理该消息队列
+
+=======================================================================
+from datetime import datetime
+
+# 当前时间，字符串格式
+s = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+# logging
+import logging
+import os
+
+import colorlog
+
+log = logging.getLogger("test")
+log.setLevel(logging.DEBUG)
+
+# 终端输出 Info级别 colorlog 为终端输出加上颜色
+sh = logging.StreamHandler()
+sh_fmt = colorlog.ColoredFormatter("%(log_color)s%(asctime)s %(levelname)s: %(filename)s[%(lineno)d]: %(message)s")
+sh.setFormatter(sh_fmt)
+sh.setLevel(logging.INFO)
+log.addHandler(sh)
+
+# 文件记录 debug级别
+file_handler = logging.FileHandler("222.log",mode="w")
+file_handler.setLevel(logging.DEBUG)
+file_fmt = "%(asctime)s %(levelname)s: %(filename)s[%(lineno)d]: %(message)s"
+file_handler.setFormatter(logging.Formatter(file_fmt,datefmt="%Y-%m-%d %H:%M:%S"))
+
+log.addHandler(file_handler)
+
+log.debug("debug")
+log.warning("warning")
+log.info("info")
+log.error("error")
+
+
+
+
+
