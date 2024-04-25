@@ -1,34 +1,90 @@
 
+Python被严重低估的库decorator，装饰器之神！
 
-=============mysql drop,truncate,delete的区别===================================================================================
+这个库可以帮你做什么呢 ？
 
-MySQL中，drop、truncate和delete都是删除数据表中的数据，但它们之间有一些区别。
+其实很简单，就是可以帮你更方便地写python装饰器代码，更重要的是，它让 Python 中被装饰器装饰后的方法长得更像装饰前的方法。
 
-1. DROP
+有了这个库，再也不用手写那嵌套了一层又一层的装饰器了，看着就糟心
 
-DROP命令用于删除整个数据表，包括表结构和数据，使用该命令后，表将不存在，所有数据将被永久删除。语法如下：
+# 下面是一个基本的装饰器deco的写法
+from decorator import decorator
 
-```
-DROP TABLE table_name;
-```
+@decorator
+def deco(func,*args,**kw):
+    print("func before my do")
+    func(*args,**kw)
+    print("func after my do")
 
-2. TRUNCATE
+@deco
+def myfunc():
+    print("do my func")
 
-TRUNCATE命令用于删除数据表中的所有数据，但是保留表结构，使用该命令后，表中的数据将被清空，但是表结构不会被删除。语法如下：
+myfunc()
 
-```
-TRUNCATE TABLE table_name;
-```
+输出如下：
 
-3. DELETE
+func before my do
+do my func
+func after my do
 
-DELETE命令用于删除数据表中的一部分数据，可以根据条件删除指定的数据，使用该命令后，表结构不会被删除，只有符合条件的数据被删除。语法如下：
 
-```
-DELETE FROM table_name WHERE condition;
-```
 
-总的来说，DROP命令最为彻底，TRUNCATE命令次之，DELETE命令最为灵活，可以根据条件删除指定的数据。在使用这些命令时，需要谨慎操作，以免误删数据。
+# 带参数的装饰器的写法
+@decorator
+def deco1(func,name=None,*args,**kw):
+    print("func before my do",name)
+    func(*args,**kw)
+    print("func after my do")
+
+@deco1(name="name-1")
+def myfunc():
+    print("do my func")
+
+myfunc()
+
+输出：
+
+func before my do name-1
+do my func
+func after my do
+
+
+怎么样，是不是超级简单，心动不如行动，用起来吧，兄弟！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
