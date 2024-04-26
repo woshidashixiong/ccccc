@@ -1,95 +1,18 @@
 
-Python被严重低估的库decorator，装饰器之神！
+================================================python django的ORM是什么，有什么优势========================================================================
 
-这个库可以帮你做什么呢 ？
+Django ORM是Django框架中提供的一种对象关系映射（ORM）工具，它可以将Python类和数据库表之间进行映射，使得开发者可以通过Python语言来操作数据库，而不需要直接使用SQL语句。
 
-其实很简单，就是可以帮你更方便地写python装饰器代码，更重要的是，它让 Python 中被装饰器装饰后的方法长得更像装饰前的方法。
+Django ORM的优势包括：
 
-有了这个库，再也不用手写那嵌套了一层又一层的装饰器了，看着就糟心
+1. 简化开发：使用Django ORM可以避免手写SQL语句，从而简化了开发过程，提高了开发效率。
 
-# 下面是一个基本的装饰器deco的写法
-from decorator import decorator
+2. 跨数据库支持：Django ORM支持多种数据库，如MySQL、PostgreSQL、SQLite等，可以在不同的数据库之间切换而不需要修改代码。
 
-@decorator
-def deco(func,*args,**kw):
-    print("func before my do")
-    func(*args,**kw)
-    print("func after my do")
+3. 数据库迁移：Django ORM提供了数据库迁移工具，可以轻松地将数据库结构从一个版本迁移到另一个版本。
 
-@deco
-def myfunc():
-    print("do my func")
+4. 安全性：Django ORM可以自动处理SQL注入等安全问题，从而提高了应用程序的安全性。
 
-myfunc()
+5. 可读性：Django ORM的代码比手写SQL更易读，易于维护和扩展。
 
-输出如下：
-
-func before my do
-do my func
-func after my do
-
-
-
-# 带参数的装饰器的写法
-@decorator
-def deco1(func,name=None,*args,**kw):
-    print("func before my do",name)
-    func(*args,**kw)
-    print("func after my do")
-
-@deco1(name="name-1")
-def myfunc():
-    print("do my func")
-
-myfunc()
-
-输出：
-
-func before my do name-1
-do my func
-func after my do
-
-
-怎么样，是不是超级简单，心动不如行动，用起来吧，兄弟！
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+总之，Django ORM是一个功能强大、易于使用和高效的ORM工具，可以大大简化开发过程，提高开发效率。
