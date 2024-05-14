@@ -1,96 +1,26 @@
+请详细解释Flask的请求和响应过程？
 
-=========================================================================================
-python多进程的进程池的最大进程数是越多越好吗？
-
-
-import os,time
-import multiprocessing
-from multiprocessing import Pool
-def work(n):
-    print(f"{n} run")
-    b = 0
-    for i in range(100000):
-        b += i
-    return b
-    
-
-1000个串行work,耗时3.7s
-
-start = time.time()
-print("start",start)
-for i in range(1000):
-    work(i)
-end = time.time()
-print("end", end,end-start)
-
-
-1000个并行work, 进程数n跟耗时对比
-
-start = time.time()
-print("start", start)
-p=Pool(n) #进程池中从无到有创建n个进程,以后一直是这n个进程在执行任务,不填默认为系统cpu核心数 multiprocessing.cpu_count()
-res_l=[]
-for i in range(1000):
-    res=p.apply_async(work,args=(i,))
-    res_l.append(res)
-p.close()
-p.join()
-end = time.time()
-print("end", end,end-start)
-
-# 串行 3.7
-# 1  4.02
-# 5  1.15
-# 10  1.11
-# 20  1.30
-# 30  1.64
-# 50  2.48
-# 100  4.04
-# 500  20.49
-# 1000  47.89
-
-
-结论，n的数量并不是越大越好，因为cpu数是固定的，进程开的多cpu也无法被利用，反而开进程的开销大导致效率不减反增，最优值为系统的cpu核心数
-
-============================================================================================================================
-
-python多线程的线程池的最大线程数是越多越好吗？
-
-import os,time
-from concurrent.futures import ThreadPoolExecutor
-def work(n):
-    print(f"{n} run")
-    time.sleep(1)
-    return n
-
-10w个并行work, 线程数n跟耗时对比
-
-start = time.time()
-print("start", start)
-threadpool = ThreadPoolExecutor(n) # n控制最大线程数，不是立即开启N个线程，所以此处不消耗时间
-res_l=[]
-for i in range(100000):
-    res= threadpool.submit(work, i)
-    res_l.append(res)
-threadpool.shutdown(True)
-end = time.time()
-print("end", end,end-start)
-
-
-# 5k   21
-# 6k   18
-# 7k   16
-# 8k   14
-# 9k   13/13.57/13/13.68
-# 1w   12.43/12.34/12.34/12/12
-# 2w   10.53/10.67/10.47/10.91
-# 3w   12/13/12/13
-# 4w   16/16
-# 5w   20/22/20
-# 10w  /59/64/60/68/57
-
-结论，当并行任务数足够多的时候，线程数并不是越多越好，线程数有一个阈值，该阈值跟电脑性能，任务耗时都有关系，并不是固定的，当前实验阈值1w-3w之间，当开启的线程数超过该阈值，效率反而下降
-
-
-
-
+Flask的请求和响应过程可以分为以下几个步骤:
+1.启动应用:
+当运行 app.nun()时,Flask应用开始监听指定的端口,并等待客户端的HTTP请求。
+2.接收请求:
+客户端(通常是浏览器)向Flask应用发起一个HTTP请求。请求包含诸如URL、方法(GET、POST等)、头信息以及可能的数据体
+等信息。
+3.路由分发:
+Flask使用Werkzeug库处理请求。根据请求的URL,Werkzeug会找到与之匹配的视图函数(通过装饰器@app.noute 注册)。如果找
+不到匹配的路由,将返回404错误。
+4.请求上下文初始化:
+在调用视图函数之前,Flask会创建一个请求上下文对象。这个对象包含了请求相关的数据,如请求参数、cookies、headers等。在
+上下文中,可以通过全局变量request 访问这些数据。
+5.执行视图函数:
+视图函数负责处理业务逻辑,包括从数据库查询数据、计算结果等。它们通常返回一个渲染后的模板字符串或JSON数据。
+6.模板渲染:
+如果视图函数返回了一个模板字符串,Flask会使用Jinja2引擎将其渲染为HTML文档。在这个过程中,可以在模板中嵌入Python代码
+来动态生成页面内容。
+7.设置响应:
+根据视图函数返回的内容类型,Flask会设置正确的Content-Type头。例如,如果返回的是HTML,则Content-Type为"text/html";如
+果是JSON,则为"application/json"。
+8.发送响应:
+最后,Flask将生成的HTML文档或JSON数据作为HTTP响应返回给客户端。响应也包含其他相关信息,如状态码、响应头等。
+9.清理资源:
+在请求结束后,Flask会释放所有与请求相关的资源,例如关闭数据库连接。同时,请求上下文也会被销毁。
