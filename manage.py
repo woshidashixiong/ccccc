@@ -1,3 +1,30 @@
+        "pageNo": 1,
+        "pageSize": 1000,
+        "queryType":"door",
+        "resourceInfos":[{
+            "resourceIndexCode": "e705142147c442b7802bf2be734230f6",
+            "resourceType": "door",
+        }]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Python是一种广泛使用的编程语言，它的灵活性和易用性使得它成为了许多开发者的首选语言。Python拥有众多的库和框架，其中Pillow库是一款非常受欢迎的图像处理库。在本文中，我们将详细介绍Pillow库的功能和用法。
 
 Pillow库是Python的一个图像处理库，它是Python Imaging Library（PIL）的一个分支，具有更好的开发和维护。Pillow库支持多种文件格式，包括JPEG、PNG、BMP、GIF、TIFF等。它提供了许多图像操作功能，如调整大小、旋转、裁剪、滤镜、颜色转换等，可以方便地进行图像处理。
